@@ -19,7 +19,14 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         padding: const EdgeInsets.fromLTRB(16, 250, 16, 0),
         child: Column(
           children: [
-            TextInputField(_showSignIn),
+            TextInputField(
+              hintText: 'Email',
+              onChanged: (_) {},
+            ),
+            TextInputField(
+              hintText: 'Password',
+              onChanged: (_) {},
+            ),
             GestureDetector(
               onTap: () {
                 setState(() {
