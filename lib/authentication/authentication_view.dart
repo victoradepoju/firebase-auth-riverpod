@@ -1,3 +1,4 @@
+import 'package:auth_firebase_riverpod/components/animated_button.dart';
 import 'package:auth_firebase_riverpod/components/text_input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -27,13 +28,32 @@ class _AuthenticationViewState extends State<AuthenticationView> {
               hintText: 'Password',
               onChanged: (_) {},
             ),
+            AnimatedButton(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFF5D973),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Text(
+                  'Sign In',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 setState(() {
                   _showSignIn = !_showSignIn;
                 });
               },
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('Toggle'),
               ),
