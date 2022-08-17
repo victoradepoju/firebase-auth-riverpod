@@ -2,6 +2,7 @@ import 'package:auth_firebase_riverpod/authentication/signin/sign_in.dart';
 import 'package:auth_firebase_riverpod/authentication/signup/sign_up.dart';
 import 'package:auth_firebase_riverpod/components/animated_button.dart';
 import 'package:auth_firebase_riverpod/components/auth_switch_button.dart';
+import 'package:auth_firebase_riverpod/components/slide_fade_switcher.dart';
 import 'package:auth_firebase_riverpod/components/text_input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,10 @@ class _AuthenticationViewState extends State<AuthenticationView> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 250, 16, 0),
-            child: _showSignIn ? SignIn() : SignUp(),
-          ),
+              padding: const EdgeInsets.fromLTRB(16, 250, 16, 0),
+              child: SlideFadeSwitcher(
+                child: _showSignIn ? SignIn() : SignUp(),
+              )),
           AuthSwitchButton(
               showSignIn: _showSignIn,
               onTap: () {

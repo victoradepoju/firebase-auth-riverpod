@@ -1,3 +1,4 @@
+import 'package:auth_firebase_riverpod/authentication/google_signin/google_signin_button.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/button.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/forgot_password_button.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/or_divider.dart';
@@ -21,6 +22,7 @@ class SignIn extends StatelessWidget {
         SizedBox(height: 24),
         SignInButton(),
         OrDivider(),
+        GoogleSignInButton(),
       ],
     );
   }
