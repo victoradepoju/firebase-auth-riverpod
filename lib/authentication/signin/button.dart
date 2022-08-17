@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:auth_firebase_riverpod/components/loading_error.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/animated_button.dart';
@@ -11,38 +12,9 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedButton(
       onTap: () {
-        ErrorDialog.show(context);
+        ErrorDialog.show(context, 'failed loading');
       },
       child: const RoundedButtonStyle(title: 'Sign In'),
-    );
-  }
-}
-
-class ErrorDialog extends StatelessWidget {
-  const ErrorDialog({Key? key}) : super(key: key);
-
-  static Future<void> show(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (_) => const ErrorDialog(),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Error'),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Center(
-            child: Text(
-              'Okay',
-              // textAlign: TextAlign.end,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
