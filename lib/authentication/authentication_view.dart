@@ -1,3 +1,5 @@
+import 'package:auth_firebase_riverpod/authentication/signin/sign_in.dart';
+import 'package:auth_firebase_riverpod/authentication/signup/sign_up.dart';
 import 'package:auth_firebase_riverpod/components/animated_button.dart';
 import 'package:auth_firebase_riverpod/components/auth_switch_button.dart';
 import 'package:auth_firebase_riverpod/components/text_input_field.dart';
@@ -21,37 +23,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 250, 16, 0),
-            child: Column(
-              children: [
-                TextInputField(
-                  hintText: 'Email',
-                  onChanged: (_) {},
-                ),
-                TextInputField(
-                  hintText: 'Password',
-                  onChanged: (_) {},
-                ),
-                AnimatedButton(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF5D973),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: _showSignIn ? SignIn() : SignUp(),
           ),
           AuthSwitchButton(
               showSignIn: _showSignIn,
