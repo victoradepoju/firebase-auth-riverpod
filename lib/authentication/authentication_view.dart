@@ -1,6 +1,7 @@
 import 'package:auth_firebase_riverpod/authentication/signin/sign_in.dart';
 import 'package:auth_firebase_riverpod/authentication/signup/sign_up.dart';
 import 'package:auth_firebase_riverpod/components/animated_button.dart';
+import 'package:auth_firebase_riverpod/components/animated_paint.dart';
 import 'package:auth_firebase_riverpod/components/auth_switch_button.dart';
 import 'package:auth_firebase_riverpod/components/slide_fade_switcher.dart';
 import 'package:auth_firebase_riverpod/components/text_input_field.dart';
@@ -18,15 +19,24 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   @override
   Widget build(BuildContext context) {
+    final double devWidth = MediaQuery.of(context).size.width;
+    final double paintPadding = devWidth * 0.6 + 30;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Padding(
-              padding: const EdgeInsets.fromLTRB(16, 250, 16, 0),
-              child: SlideFadeSwitcher(
-                child: _showSignIn ? SignIn() : SignUp(),
-              )),
+            padding: EdgeInsets.fromLTRB(16, paintPadding, 16, 0),
+            child: SlideFadeSwitcher(
+              child: _showSignIn ? SignIn() : SignUp(),
+            ),
+          ),
+          const AnimatedPaint(
+            frontColor: Colors.black,
+            backColor: Colors.blue,
+            show: true,
+            title: 'Create Account',
+          ),
           AuthSwitchButton(
               showSignIn: _showSignIn,
               onTap: () {
