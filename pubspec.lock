@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -149,6 +156,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  form_validators:
+    dependency: "direct main"
+    description:
+      path: "packages/form_validators"
+      relative: true
+    source: path
+    version: "0.0.0"
+  formz:
+    dependency: transitive
+    description:
+      name: formz
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   http_parser:
     dependency: transitive
     description:
