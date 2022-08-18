@@ -14,22 +14,32 @@ class BackgroundCustomPaint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: BackgroundPainter(
-        frontPaintColor: frontPaintColor,
-        backPaintColor: backPaintColor,
-        controller: controller,
-      ),
+    return Stack(
+      children: [
+        CustomPaint(
+          // size is very important when stacking CustomPaints.
+          size: MediaQuery.of(context).size,
+          painter: BackgroundPainter(
+            frontPaintColor: frontPaintColor,
+            backPaintColor: backPaintColor,
+          ),
+        ),
+        CustomPaint(
+          size: MediaQuery.of(context).size,
+          painter: TopPainter(
+            controller: controller,
+            frontPaintColor: frontPaintColor,
+          ),
+        )
+      ],
     );
   }
 }
 
 class BackgroundPainter extends CustomPainter {
-  final AnimationController controller;
   final Color frontPaintColor;
   final Color backPaintColor;
   BackgroundPainter({
-    required this.controller,
     required this.frontPaintColor,
     required this.backPaintColor,
   });
@@ -48,43 +58,72 @@ class BackgroundPainter extends CustomPainter {
     final paint = Paint()..color = backPaintColor; //rgb(88,190,230)
     final path = Path()
       ..moveTo(shapeBounds.topLeft.dx, shapeBounds.topLeft.dy)
-      ..lineTo(
-        shapeBounds.left,
-        Tween<double>(begin: 0, end: shapeBounds.height * 0.42)
-            .animate(controller)
-            .value,
-      )
-      ..lineTo(
-        shapeBounds.width * 0.58,
-        Tween<double>(begin: 0, end: shapeBounds.height * 0.75)
-            .animate(controller)
-            .value,
-      )
+      ..lineTo(shapeBounds.left, shapeBounds.height * 0.42)
+      ..lineTo(shapeBounds.width * 0.58, shapeBounds.height * 0.75)
       ..quadraticBezierTo(
-        shapeBounds.width - (shapeBounds.width / 4),
-        Tween<double>(begin: 0, end: shapeBounds.bottom)
-            .animate(controller)
-            .value,
-        shapeBounds.bottomRight.dx,
-        Tween<double>(begin: 0, end: shapeBounds.bottomRight.dy)
-            .animate(controller)
-            .value,
-      )
-      ..lineTo(
-        shapeBounds.topRight.dx,
-        Tween<double>(begin: 0, end: shapeBounds.topRight.dy)
-            .animate(controller)
-            .value,
-      )
-      ..lineTo(
-        shapeBounds.topLeft.dx,
-        Tween<double>(begin: 0, end: shapeBounds.topLeft.dy)
-            .animate(controller)
-            .value,
+          shapeBounds.width - (shapeBounds.width / 4),
+          shapeBounds.bottom,
+          shapeBounds.bottomRight.dx,
+          shapeBounds.bottomRight.dy)
+      ..lineTo(shapeBounds.topRight.dx, shapeBounds.topRight.dy)
+      ..lineTo(shapeBounds.topLeft.dx, shapeBounds.topLeft.dy)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  void _paintBlackCurve(Canvas canvas, Rect shapeBounds) {
+    final paint = Paint()..color = Colors.black;
+    final path = Path()
+      ..moveTo(shapeBounds.left, shapeBounds.height * 0.42)
+      ..lineTo(shapeBounds.left, shapeBounds.height * 0.75)
+      ..quadraticBezierTo(shapeBounds.width * 0.5, shapeBounds.bottom,
+          shapeBounds.width * 0.58, shapeBounds.height * 0.75)
+      ..quadraticBezierTo(
+          (shapeBounds.width - (shapeBounds.width / 6)),
+          shapeBounds.height * 0.28,
+          shapeBounds.right,
+          shapeBounds.height * 0.28)
+      ..lineTo(shapeBounds.topRight.dx, shapeBounds.topRight.dy)
+      ..lineTo(shapeBounds.width * 0.54, shapeBounds.top)
+      ..quadraticBezierTo(
+          shapeBounds.width * 0.28,
+          shapeBounds.height * 0.26 * 0.2,
+          shapeBounds.width * 0.25,
+          shapeBounds.height * 0.26)
+      ..quadraticBezierTo(
+        shapeBounds.width / 5,
+        shapeBounds.height * 0.45,
+        shapeBounds.left,
+        shapeBounds.height * 0.42,
       )
       ..close();
 
     canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(BackgroundPainter oldDelegate) {
+    return false;
+    // frontPaintColor != oldDelegate.frontPaintColor;
+  }
+}
+
+class TopPainter extends CustomPainter {
+  final AnimationController controller;
+  final Color frontPaintColor;
+  TopPainter({
+    required this.controller,
+    required this.frontPaintColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final shapeBounds = Rect.fromLTRB(0, 0, size.width, size.height * 0.6);
+    // final paint = Paint()..color = color;
+    // canvas.drawRect(shapeBounds, paint);
+
+    _paintBlackCurve(canvas, shapeBounds);
   }
 
   void _paintBlackCurve(Canvas canvas, Rect shapeBounds) {
@@ -158,7 +197,7 @@ class BackgroundPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(BackgroundPainter oldDelegate) {
+  bool shouldRepaint(TopPainter oldDelegate) {
     return true;
     // frontPaintColor != oldDelegate.frontPaintColor;
   }

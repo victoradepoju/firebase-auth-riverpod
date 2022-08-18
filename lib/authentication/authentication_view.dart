@@ -37,10 +37,10 @@ class _AuthenticationViewState extends State<AuthenticationView> {
             show: true,
             title: 'Create Account',
           ),
-          const AnimatedPaint(
-            frontColor: Colors.blue,
-            backColor: Colors.black,
-            show: true,
+          AnimatedPaint(
+            frontColor: const Color(0xFFF5D973),
+            backColor: Colors.blue,
+            show: !_showSignIn,
             title: 'Create Account',
           ),
           AuthSwitchButton(

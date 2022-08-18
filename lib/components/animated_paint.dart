@@ -34,6 +34,14 @@ class _AnimatedPaintState extends State<AnimatedPaint>
   }
 
   @override
+  void didUpdateWidget(covariant AnimatedPaint oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.show
+        ? _animationController.reverse()
+        : _animationController.forward();
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
