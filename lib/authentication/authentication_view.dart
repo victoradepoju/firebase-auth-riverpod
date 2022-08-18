@@ -14,8 +14,33 @@ class AuthenticationView extends StatefulWidget {
   State<AuthenticationView> createState() => _AuthenticationViewState();
 }
 
-class _AuthenticationViewState extends State<AuthenticationView> {
+class _AuthenticationViewState extends State<AuthenticationView>
+    with SingleTickerProviderStateMixin {
   bool _showSignIn = true;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  bool show = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1000));
+    _animation =
+        Tween<double>(begin: 1.0, end: 0).animate(_animationController);
+  }
+
+  // @override
+  // void didUpdateWidget(covariant AuthenticationView oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   show ? _animationController.reverse() : _animationController.forward();
+  // }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +62,22 @@ class _AuthenticationViewState extends State<AuthenticationView> {
             show: true,
             title: 'Create Account',
           ),
-          AnimatedPaint(
-            frontColor: const Color(0xFFF5D973),
-            backColor: Colors.blue,
-            show: !_showSignIn,
-            title: 'Create Account',
+          SizeTransition(
+            axis: Axis.vertical,
+            sizeFactor: _animation,
+            child: AnimatedPaint(
+              frontColor: const Color(0xFFF5D973),
+              backColor: Colors.blue,
+              show: !_showSignIn,
+              title: 'Create Account',
+            ),
           ),
           AuthSwitchButton(
-              showSignIn: _showSignIn,
+              showSignIn: true, // true _showSignIn,
               onTap: () {
                 setState(() {
                   _showSignIn = !_showSignIn;
+                  _showSignIn ? _animation : _animationController.reverse();
                 });
               }),
         ],
