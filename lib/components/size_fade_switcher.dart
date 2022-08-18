@@ -28,7 +28,7 @@ class SizeFadeSwitcher extends StatelessWidget {
             parent: animation,
             curve: const Interval(
               0.5,
-              0.1,
+              1.0,
             ),
           ),
         );

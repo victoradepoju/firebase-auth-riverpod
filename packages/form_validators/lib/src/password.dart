@@ -17,7 +17,7 @@ class Password extends FormzInput<String, PasswordValidationError> {
     }
   }
 
-  static String? showPasswordErrorMessage(PasswordValidationError error) {
+  static String? showPasswordErrorMessage(PasswordValidationError? error) {
     if (error == PasswordValidationError.empty) {
       return 'Empty password';
     } else if (error == PasswordValidationError.invalid) {

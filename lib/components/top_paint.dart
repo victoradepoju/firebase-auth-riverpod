@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class BackgroundCustomPaint extends StatelessWidget {
   final Color frontPaintColor;
   final Color backPaintColor;
-  final AnimationController controller;
+  // final AnimationController controller;
   const BackgroundCustomPaint({
     Key? key,
     required this.frontPaintColor,
     required this.backPaintColor,
-    required this.controller,
+    // required this.controller,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class BackgroundCustomPaint extends StatelessWidget {
         CustomPaint(
           size: MediaQuery.of(context).size,
           painter: TopPainter(
-            controller: controller,
+            // controller: controller,
             frontPaintColor: frontPaintColor,
           ),
         )
@@ -108,10 +108,10 @@ class BackgroundPainter extends CustomPainter {
 }
 
 class TopPainter extends CustomPainter {
-  final AnimationController controller;
+  // final AnimationController controller;
   final Color frontPaintColor;
   TopPainter({
-    required this.controller,
+    // required this.controller,
     required this.frontPaintColor,
   });
 

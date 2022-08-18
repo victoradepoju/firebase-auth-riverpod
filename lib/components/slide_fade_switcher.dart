@@ -14,11 +14,11 @@ class SlideFadeSwitcher extends StatelessWidget {
       duration: const Duration(milliseconds: 800),
       transitionBuilder: (child, animation) {
         final offsetAnimation = Tween<Offset>(
-          begin: const Offset(0, 0.02),
+          begin: const Offset(0, 0.1),
           end: Offset.zero,
         ).animate(animation);
 
-        final fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+        final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(
             parent: animation,
             curve: const Interval(

@@ -6,13 +6,13 @@ import 'package:auth_firebase_riverpod/components/top_paint.dart';
 class AnimatedPaint extends StatefulWidget {
   final Color frontColor;
   final Color backColor;
-  final bool show;
+  final bool? show;
   final String title;
   const AnimatedPaint({
     Key? key,
     required this.frontColor,
     required this.backColor,
-    required this.show,
+    this.show,
     required this.title,
   }) : super(key: key);
 
@@ -20,32 +20,32 @@ class AnimatedPaint extends StatefulWidget {
   State<AnimatedPaint> createState() => _AnimatedPaintState();
 }
 
-class _AnimatedPaintState extends State<AnimatedPaint>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
+class _AnimatedPaintState
+    extends State<AnimatedPaint> /*with SingleTickerProviderStateMixin*/ {
+  // late AnimationController _animationController;
 
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    )..forward();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _animationController = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(milliseconds: 800),
+  //   )..forward();
+  // }
 
-  @override
-  void didUpdateWidget(covariant AnimatedPaint oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    widget.show
-        ? _animationController.reverse()
-        : _animationController.forward();
-  }
+  // @override
+  // void didUpdateWidget(covariant AnimatedPaint oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   widget.show
+  //       ? _animationController.reverse()
+  //       : _animationController.forward();
+  // }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _animationController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +53,16 @@ class _AnimatedPaintState extends State<AnimatedPaint>
       width: double.infinity,
       child: AspectRatio(
         aspectRatio: 1.0,
-        child: AnimatedBuilder(
+        child: /*AnimatedBuilder(
           animation: _animationController,
-          builder: (context, child) => BackgroundCustomPaint(
-            frontPaintColor: widget.frontColor,
-            backPaintColor: widget.backColor,
-            controller: _animationController,
-          ),
+          builder: (context, child) => */
+            BackgroundCustomPaint(
+          frontPaintColor: widget.frontColor,
+          backPaintColor: widget.backColor,
+          // controller: _animationController,
         ),
       ),
+      // ),
     );
   }
 }

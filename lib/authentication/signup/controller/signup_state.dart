@@ -1,6 +1,6 @@
 part of 'signup_controller.dart';
 
-class SignUpState extends Equatable {
+class SignUpState {
   final Name name;
   final Email email;
   final Password password;
@@ -11,7 +11,7 @@ class SignUpState extends Equatable {
     this.name = const Name.pure(),
     this.email = const Email.pure(),
     this.password = const Password.pure(),
-    this.status = const FormzStatus.pure(),
+    this.status = FormzStatus.pure,
     this.errorMessage,
   });
 
