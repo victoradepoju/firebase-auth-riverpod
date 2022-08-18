@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  authentication_repository:
+    path: packages/firebase_auth_repository
   loading_animation_widget:
   flutter_riverpod: 2.0.0-dev.9
   firebase_auth: ^3.6.3
