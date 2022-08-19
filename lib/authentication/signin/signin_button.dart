@@ -18,7 +18,7 @@ class SignInButton extends ConsumerWidget {
     final bool isValidated = signInState.status.isValidated;
 
     return AnimatedButton(
-      onTap: isValidated
+      onTap: !isValidated
           ? () => signInController.signInWithEmailAndPassword()
           : null,
       // ErrorDialog.show(context, 'failed loading');

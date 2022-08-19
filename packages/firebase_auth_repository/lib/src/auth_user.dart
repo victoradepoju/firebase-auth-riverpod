@@ -13,6 +13,7 @@ class AuthUser extends Equatable {
     this.emailVerified = false,
   });
 
+  // id is required.
   static const empty = AuthUser(id: '');
 
   bool get isEmpty => this == empty;

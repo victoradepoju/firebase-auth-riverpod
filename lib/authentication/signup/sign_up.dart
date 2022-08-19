@@ -1,4 +1,4 @@
-import 'package:auth_firebase_riverpod/authentication/signup/button.dart';
+import 'package:auth_firebase_riverpod/authentication/signup/signup_button.dart';
 import 'package:auth_firebase_riverpod/authentication/signup/email_field.dart';
 import 'package:auth_firebase_riverpod/authentication/signup/name_field.dart';
 import 'package:auth_firebase_riverpod/authentication/signup/password_field.dart';
