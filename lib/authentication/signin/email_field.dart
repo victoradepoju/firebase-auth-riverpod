@@ -12,13 +12,13 @@ class EmailField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final signInState = ref.watch(signInProvider);
     final bool showError = signInState.email.invalid;
-    final SignInController = ref.read(signInProvider.notifier);
+    final signInController = ref.read(signInProvider.notifier);
     return TextInputField(
       hintText: 'Email',
       errorText: showError
           ? Email.showEmailErrorMessage(signInState.email.error)
           : null,
-      onChanged: (email) => SignInController.onEmailChanged(email),
+      onChanged: (email) => signInController.onEmailChange(email),
     );
   }
 }

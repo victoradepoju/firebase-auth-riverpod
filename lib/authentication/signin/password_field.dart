@@ -12,14 +12,14 @@ class PasswordField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final signInState = ref.watch(signInProvider);
     final bool showError = signInState.password.invalid;
-    final SignInController = ref.read(signInProvider.notifier);
+    final signInController = ref.read(signInProvider.notifier);
     return TextInputField(
       obscureText: true,
       errorText: showError
           ? Password.showPasswordErrorMessage(signInState.password.error)
           : null,
       hintText: 'Password',
-      onChanged: (password) => SignInController.onPasswordChanged(password),
+      onChanged: (password) => signInController.onPasswordChange(password),
     );
   }
 }

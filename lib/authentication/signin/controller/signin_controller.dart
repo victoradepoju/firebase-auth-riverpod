@@ -11,21 +11,30 @@ class SignInController extends StateNotifier<SignInState> {
   final AuthenticationRepository _authenticationRepository;
   SignInController(this._authenticationRepository) : super(SignInState());
 
-  void onEmailChanged(String value) {
+  void onEmailChange(String value) {
     final email = Email.dirty(value);
-
     state = state.copyWith(
       email: email,
-      status: Formz.validate([email, state.password]),
+      status: Formz.validate(
+        [
+          email,
+          state.password,
+        ],
+      ),
     );
   }
 
-  void onPasswordChanged(String value) {
+  void onPasswordChange(String value) {
     final password = Password.dirty(value);
 
     state = state.copyWith(
       password: password,
-      status: Formz.validate([state.email, password]),
+      status: Formz.validate(
+        [
+          state.email,
+          password,
+        ],
+      ),
     );
   }
 
