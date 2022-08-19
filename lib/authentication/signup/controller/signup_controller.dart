@@ -1,11 +1,15 @@
+import 'package:auth_firebase_riverpod/repository/auth_repo_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 import 'package:equatable/equatable.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 
 part 'signup_state.dart';
 
 class SignUpController extends StateNotifier<SignUpState> {
-  SignUpController() : super(const SignUpState());
+  // this is needed for signUpWithEmailAndPassword method
+  final AuthenticationRepository _authenticationRepository;
+  SignUpController(this._authenticationRepository) : super(const SignUpState());
 
   // this function will be called whenever the user types something in the
   // name input field.
@@ -54,11 +58,23 @@ class SignUpController extends StateNotifier<SignUpState> {
   void signUpWithEmailAndPassword() async {
     if (!state.status.isValidated) return;
 
-    print('signUp');
+    state = state.copyWith(status: FormzStatus.submissionInProgress);
+    try {
+      await _authenticationRepository.signInWithEmailAndPassword(
+        email: state.email.value,
+        password: state.password.value,
+      );
+
+      state = state.copyWith(status: FormzStatus.submissionSuccess);
+    } on SignUpWithEmailAndPasswordFailure catch (e) {
+      state = state.copyWith(
+          status: FormzStatus.submissionFailure, errorMessage: e.code);
+    }
   }
 }
 
 final signUpProvider =
     StateNotifierProvider<SignUpController, SignUpState>((ref) {
-  return SignUpController();
+  final authRepository = ref.watch(authRepoProvider);
+  return SignUpController(authRepository);
 });
