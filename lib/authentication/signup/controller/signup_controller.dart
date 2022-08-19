@@ -60,7 +60,7 @@ class SignUpController extends StateNotifier<SignUpState> {
 
     state = state.copyWith(status: FormzStatus.submissionInProgress);
     try {
-      await _authenticationRepository.signInWithEmailAndPassword(
+      await _authenticationRepository.signUpWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
