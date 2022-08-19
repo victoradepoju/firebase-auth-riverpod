@@ -47,18 +47,17 @@ class SignInController extends StateNotifier<SignInState> {
         email: state.email.value,
         password: state.password.value,
       );
+
       state = state.copyWith(status: FormzStatus.submissionSuccess);
     } on SignInWithEmailAndPasswordFailure catch (e) {
       state = state.copyWith(
-        status: FormzStatus.submissionFailure,
-        errorMessage: e.code,
-      );
+          status: FormzStatus.submissionFailure, errorMessage: e.code);
     }
   }
 }
 
 final signInProvider =
     StateNotifierProvider<SignInController, SignInState>((ref) {
-  final authenticationRepository = ref.watch(authRepoProvider);
-  return SignInController(authenticationRepository);
+  final authRepository = ref.watch(authRepoProvider);
+  return SignInController(authRepository);
 });
