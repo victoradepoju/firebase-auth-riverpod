@@ -1,6 +1,6 @@
 part of 'signup_controller.dart';
 
-class SignUpState {
+class SignUpState extends Equatable {
   final Name name;
   final Email email;
   final Password password;
@@ -32,7 +32,6 @@ class SignUpState {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         name,
         email,

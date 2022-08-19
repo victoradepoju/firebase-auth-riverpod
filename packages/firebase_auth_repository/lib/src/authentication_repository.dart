@@ -29,16 +29,14 @@ class AuthenticationRepository {
 
   Stream<AuthUser> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      if (firebaseUser == null) {
-        return AuthUser.empty;
-      } else {
-        return AuthUser(
-          id: firebaseUser.uid,
-          email: firebaseUser.email,
-          name: firebaseUser.displayName,
-          emailVerified: firebaseUser.emailVerified,
-        );
-      }
+      return firebaseUser == null
+          ? AuthUser.empty
+          : AuthUser(
+              id: firebaseUser.uid,
+              email: firebaseUser.email,
+              name: firebaseUser.displayName,
+              emailVerified: firebaseUser.emailVerified,
+            );
     });
   }
 

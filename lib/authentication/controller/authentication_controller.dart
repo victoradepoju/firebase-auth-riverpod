@@ -17,7 +17,8 @@ class AuthController extends StateNotifier<AuthenticationState> {
   AuthController(this._authRepository)
       : super(const AuthenticationState.unauthenticated()) {
     // we need to listen to the user steam immediately to get the authstate.
-    _authRepository.user.listen((user) => _onUserChanged(user));
+    _streamSubscription =
+        _authRepository.user.listen((user) => _onUserChanged(user));
   }
 
   void _onUserChanged(AuthUser user) {
