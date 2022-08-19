@@ -1,3 +1,5 @@
+import 'package:auth_firebase_riverpod/repository/auth_repo_provider.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:form_validators/form_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 part 'signin_state.dart';
 
 class SignInController extends StateNotifier<SignInState> {
-  SignInController() : super(SignInState());
+  // just like in SignUpController
+  final AuthenticationRepository _authenticationRepository;
+  SignInController(this._authenticationRepository) : super(SignInState());
 
   void onEmailChanged(String value) {
     final email = Email.dirty(value);
@@ -27,11 +31,25 @@ class SignInController extends StateNotifier<SignInState> {
 
   void signInWithEmailAndPassword() async {
     if (!state.status.isValidated) return;
-    print('signIn');
+
+    state = state.copyWith(status: FormzStatus.submissionInProgress);
+    try {
+      await _authenticationRepository.signInWithEmailAndPassword(
+        email: state.email.value,
+        password: state.password.value,
+      );
+      state = state.copyWith(status: FormzStatus.submissionSuccess);
+    } on SignInWithEmailAndPasswordFailure catch (e) {
+      state = state.copyWith(
+        status: FormzStatus.submissionFailure,
+        errorMessage: e.code,
+      );
+    }
   }
 }
 
 final signInProvider =
     StateNotifierProvider<SignInController, SignInState>((ref) {
-  return SignInController();
+  final authenticationRepository = ref.watch(authRepoProvider);
+  return SignInController(authenticationRepository);
 });
