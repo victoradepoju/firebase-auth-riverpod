@@ -35,7 +35,7 @@ class ForgotPasswordController extends StateNotifier<ForgotPasswordState> {
   }
 }
 
-final forgotPasswordProvider =
-    StateNotifierProvider<ForgotPasswordController, ForgotPasswordState>((ref) {
+final forgotPasswordProvider = StateNotifierProvider.autoDispose<
+    ForgotPasswordController, ForgotPasswordState>((ref) {
   return ForgotPasswordController(ref.watch(authRepoProvider));
 });
