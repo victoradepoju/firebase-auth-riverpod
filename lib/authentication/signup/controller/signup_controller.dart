@@ -43,6 +43,7 @@ class SignUpController extends StateNotifier<SignUpState> {
 
   void onPasswordChange(String value) {
     final password = Password.dirty(value);
+
     state = state.copyWith(
       password: password,
       status: Formz.validate(

@@ -7,7 +7,7 @@ class SignInState extends Equatable {
   final FormzStatus status;
   final String? errorMessage;
 
-  SignInState({
+  const SignInState({
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.status = FormzStatus.pure,
@@ -29,7 +29,6 @@ class SignInState extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         email,
         password,

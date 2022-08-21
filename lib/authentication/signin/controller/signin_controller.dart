@@ -9,7 +9,7 @@ part 'signin_state.dart';
 class SignInController extends StateNotifier<SignInState> {
   // just like in SignUpController
   final AuthenticationRepository _authenticationRepository;
-  SignInController(this._authenticationRepository) : super(SignInState());
+  SignInController(this._authenticationRepository) : super(const SignInState());
 
   void onEmailChange(String value) {
     final email = Email.dirty(value);
