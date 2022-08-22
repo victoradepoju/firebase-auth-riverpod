@@ -39,6 +39,7 @@ class SignInController extends StateNotifier<SignInState> {
   }
 
   void signInWithEmailAndPassword() async {
+    print('checked button');
     if (!state.status.isValidated) return;
 
     state = state.copyWith(status: FormzStatus.submissionInProgress);

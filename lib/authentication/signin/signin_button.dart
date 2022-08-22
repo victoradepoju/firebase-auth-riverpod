@@ -14,7 +14,7 @@ class SignInButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final signInState = ref.watch(signInProvider);
     final signInController = ref.read(signInProvider.notifier);
-    final bool isValidated = signInState.status.isValidated;
+    bool isValidated = ref.watch(signInProvider).status.isValidated;
     return AnimatedButton(
       onTap: isValidated
           ? () => signInController.signInWithEmailAndPassword()

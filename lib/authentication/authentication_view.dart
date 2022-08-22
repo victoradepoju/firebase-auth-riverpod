@@ -53,7 +53,7 @@ class _AuthenticationViewState
           Padding(
             padding: EdgeInsets.fromLTRB(16, paintPadding, 16, 0),
             child: SlideFadeSwitcher(
-              child: _showSignIn ? SignIn() : SignUp(),
+              child: _showSignIn ? const SignIn() : const SignUp(),
             ),
           ),
           const AnimatedPaint(
@@ -66,7 +66,7 @@ class _AuthenticationViewState
           //   axis: Axis.vertical,
           //   sizeFactor: _animation,
           /*child:*/ const AnimatedPaint(
-            frontColor: const Color(0xFFF5D973),
+            frontColor: Color(0xFFF5D973),
             backColor: Colors.blue,
             // show: !_showSignIn,
             title: 'Create Account',

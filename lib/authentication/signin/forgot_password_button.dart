@@ -11,7 +11,7 @@ class ForgotPasswordButton extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (_) => ForgotPasswordView(),
+            builder: (_) => const ForgotPasswordView(),
           ),
         );
       },

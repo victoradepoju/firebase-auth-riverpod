@@ -1,9 +1,9 @@
 import 'package:auth_firebase_riverpod/authentication/google_signin/google_signin_button.dart';
+import 'package:auth_firebase_riverpod/authentication/signin/email_field.dart';
+import 'package:auth_firebase_riverpod/authentication/signin/password_field.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/signin_button.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/forgot_password_button.dart';
 import 'package:auth_firebase_riverpod/authentication/signin/or_divider.dart';
-import 'package:auth_firebase_riverpod/authentication/signup/email_field.dart';
-import 'package:auth_firebase_riverpod/authentication/signup/password_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 import '../../components/loading_error.dart';
